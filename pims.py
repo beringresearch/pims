@@ -19,10 +19,10 @@ app.layout = html.Div([
     dcc.Dropdown(
         id='image-dropdown',
         options=[{'label': i, 'value': i} for i in list_of_images],
-        value=list_of_images[0]
+        value=list_of_images[0], style={'font': 'arial'}
     ),
-    html.Img(id='image')
-])
+    html.Img(id='image', style={'width': 750, 'align': 'center'})
+], style={'width': 800, 'align': 'center', 'margin': '0 auto'})
 
 @app.callback(
     dash.dependencies.Output('image', 'src'),
