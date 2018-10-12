@@ -1,4 +1,5 @@
 import os
+import sys
 from flask import Flask, Response, request, abort, send_from_directory
 from flask import render_template
 from PIL import Image
@@ -8,7 +9,7 @@ app = Flask(__name__)
 
 WIDTH = 160
 HEIGHT = 120
-WORKING_DIR = os.path.realpath(__file__)
+WORKING_DIR = sys.argv[1]
 
 
 @app.route('/<path:filename>')
