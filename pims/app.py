@@ -5,12 +5,12 @@ from flask import render_template
 from PIL import Image
 from io import StringIO
 
-app = Flask(__name__)
-
 WIDTH = 160
 HEIGHT = 120
-WORKING_DIR = sys.argv[1]
+STATIC_URL_PATH = sys.argv[1]
+STATIC_FOLDER = 'tmp'
 
+app = Flask(__name__, static_url_path = STATIC_URL_PATH, static_folder = STATIC_FOLDER)
 
 @app.route('/<path:filename>')
 def image(filename):
@@ -18,29 +18,30 @@ def image(filename):
         w = int(request.args['w'])
         h = int(request.args['h'])
     except (KeyError, ValueError):
-        return send_from_directory('.', filename)
+        return send_from_directory(directory = '', filename=filename)
 
     try:
         im = Image.open(filename)
         im.thumbnail((w, h), Image.ANTIALIAS)
         io = StringIO.StringIO()
-        im.save(io, format='JPEG')
-        return Response(io.getvalue(), mimetype='image/jpeg')
+        im.save(io, format='JPG')
+        return Response(io.getvalue(), mimetype='image/jpg')
 
     except IOError:
         abort(404)
 
-    return send_from_directory(WORKING_DIR, filename)
+    return send_from_directory(directory = os.path.dirname(filename), filename=os.path.splittext(filename))
 
 @app.route('/')
 def index():
     images = []
-    for root, dirs, files in os.walk('.'):
+    for root, dirs, files in os.walk(STATIC_URL_PATH):
         files.sort()
-        for filename in [os.path.join(root, name) for name in files]:
+
+        for filename in [os.path.join(root, name) for name in files]:            
             if not filename.endswith('.png'):
                 continue
-            im = Image.open(filename)
+            im = Image.open(filename)            
             w, h = im.size
             aspect = 1.0*w/h
             print(filename)
@@ -53,7 +54,9 @@ def index():
             images.append({
                 'width': int(width),
                 'height': int(height),
-                'src': filename
+                'src': filename,
+                'dir': os.path.dirname(filename),
+                'name': os.path.basename(filename)
             })
     return render_template('index.html', images=images)    
 
