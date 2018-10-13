@@ -34,11 +34,10 @@ app.layout = html.Div([
 @app.callback(
         Output('live-dropdown', 'options'),
         [Input('interval-component', 'n_intervals')])
-def update_dropdown(n): 
+def update_dropdown(n):
+    global list_of_images
     list_of_images = [os.path.basename(x) for x in glob.glob('{}*.png'.format(image_directory))]
     options = [{'label': i, 'value': i} for i in list_of_images] 
-    for f in list_of_images:
-        flask.send_from_directory(image_directory, f)
 
     return options
 
