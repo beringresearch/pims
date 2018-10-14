@@ -24,7 +24,7 @@ Source .bashrc: `source .bashrc`
 ## Running
 On the remote machine:
 
-`pims.py FULL/PATH/TO/FOLDER/WITH/PNG/`
+`pims.py /FULL/PATH/TO/FOLDER/WITH/PNG/`
 
 On host:
 
