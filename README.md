@@ -1,4 +1,4 @@
-# Port-forwarded IMageS
+# PIMS: Port-forwarded IMageS
 
 <img src="https://github.com/beringresearch/pims/blob/master/docs/logo.png" width="100px" height="100px">
 
@@ -24,7 +24,7 @@ Source .bashrc: `source .bashrc`
 ## Running
 On the remote machine:
 
-`pims.py /PATH/TO/FOLDER/WITH/PNG`
+`pims.py FULL/PATH/TO/FOLDER/WITH/PNG/`
 
 On host:
 
