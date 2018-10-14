@@ -1,4 +1,8 @@
-# Port-forwarding of IMageS
+# Port-forwarded IMageS
+
+<img src="https://github.com/beringresearch/pims/blob/master/docs/logo.png" width="100px" height="100px">
+
+A small script designed to make it easy to track PNG images on a remote server. Useful for quick access to graphical outputs of computational analysis pipelines.
 
 ## Installation
 1. Clone the repository
