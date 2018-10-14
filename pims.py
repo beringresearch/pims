@@ -14,6 +14,9 @@ import base64
 image_directory = sys.argv[1]
 list_of_images = [os.path.basename(x) for x in glob.glob('{}*.png'.format(image_directory))]
 
+if len(list_of_images) == 0:
+    raise Exception('The directory does not appear to contain .png files')
+
 app = dash.Dash()
 
 app.layout =  html.Div([
